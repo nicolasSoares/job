@@ -173,6 +173,52 @@ tout les managers: servent a récupérer des ressources comme les auditnodes, pa
 
 
 
+_*_*_*_*_*_*_*__*_*_*_*_*_*_*_**_*_*_*_*_*_*_*_*_*_*
+_*_*_*_*_*_*_*__*_*_*_*_*_*_*_**_*_*_*_*_*_*_*_*_*_*
+_*_*_*_*_*_*_*__*_*_*_*_*_*_*_**_*_*_*_*_*_*_*_*_*_*
+_*_*_*_*_*_*_*__*_*_*_*_*_*_*_**_*_*_*_*_*_*_*_*_*_*
+_*_*_*_*_*_*_*__*_*_*_*_*_*_*_**_*_*_*_*_*_*_*_*_*_*
+
+
+Part I:
+
+Context :
+
+	The company :
+	Société Générale is one of the main and oldest french multinational banking and financial services company.
+	The company group is a universal bank divided into 3 main pillars :
+		- Retail banking (Société Générale, Crédit du Nord and Boursorama)
+		- International Banking and Financial Services (IBFS)
+		- Corporate and Investment Banking (SG CIB)
+	Those 3 pillars are backed by 2 other core activities :
+		- Specialised Financial Services & Insurance
+		- Private Banking, Global Investment Management & Services
+		
+	
+	The service:
+		You are now part of the RESG/GTS/MKT/SSB/GRD department of Société Générale, each acronym represents a layer in the hierarchy of the group :
+			- RESG : 
+				The direction of the group's ressources and innovations, it gathers the teams in charge of information systems, technical infrastructures, purchases, estate operations and counsel activities of the group
+				
+			- GTS (Global Technology Service) :
+				GTS ensures the proper functioning of computer infrastructures and their resilience and counsel and assist the business lines and functionnal divisions for the implementation of their projects
+				The computer infrastructures handle the workstations, the computing centres hosting the servers and the computer and telecom networks.
+
+			- MKT (Market) :
+				The wholesale bank division, its goal is to ensure the proper functioning of the computer infrastructures and the client relationship with its business partners SG CIB (Corporate and Investment Banking business of Société Générale) and GIMS (cover the private bank activities, asset management and securities services)
+				This division assists its clients for their infrastructures choices, coordinates changes and ensures projects monitoring, service quality and respect of financial commitments.
+				
+			- SSB (Servers, Storage and Backup) :
+				This division is in charge of operations on storage et backup of the servers. The team assure the administration, maintenance and backup of all the Market infrastructure (physical and virtual) and handles several projects to ensure the proper functioning of the production
+				
+			- GRD (Grid) :
+				The Grid team 
+The projects:
+	Common:
+	GridAudit:
+	GridSupervisor:
+
+
 
 
 
