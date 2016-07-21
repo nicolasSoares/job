@@ -1,0 +1,237 @@
+Part I:
+
+Context :
+
+	The company :
+	Société Générale is one of the main and oldest french multinational banking and financial services company.
+	The company group is a universal bank divided into 3 main pillars :
+		- Retail banking (Société Générale, Crédit du Nord and Boursorama)
+		- International Banking and Financial Services (IBFS)
+		- Corporate and Investment Banking (SG CIB)
+	Those 3 pillars are backed by 2 other core activities :
+		- Specialised Financial Services & Insurance
+		- Private Banking, Global Investment Management & Services
+		
+	
+	The service:
+		You are now part of the RESG/GTS/MKT/SSB/GRD department of Société Générale, each acronym represents a layer in the hierarchy of the group :
+			- RESG : 
+				The direction of the group's ressources and innovations, it gathers the teams in charge of information systems, technical infrastructures, purchases, estate operations and counsel activities of the group
+				
+			- GTS (Global Technology Service) :
+				GTS ensures the proper functioning of computer infrastructures and their resilience and counsel and assist the business lines and functionnal divisions for the implementation of their projects
+				The computer infrastructures handle the workstations, the computing centres hosting the servers and the computer and telecom networks.
+
+			- MKT (Market) :
+				The wholesale bank division, its goal is to ensure the proper functioning of the computer infrastructures and the client relationship with its business partners SG CIB (Corporate and Investment Banking business of Société Générale) and GIMS (cover the private bank activities, asset management and securities services)
+				This division assists its clients for their infrastructures choices, coordinates changes and ensures projects monitoring, service quality and respect of financial commitments.
+				
+			- SSB (Servers, Storage and Backup) :
+				This division is in charge of operations on storage et backup of the servers. The team assure the administration, maintenance and backup of all the Market infrastructure (physical and virtual) and handles several projects to ensure the proper functioning of the production
+				
+			- GRD (Grid) :
+				The Grid team is in charge of the computing grid
+				
+The projects:
+	Common:
+	GridAudit:
+	
+	GridAudit is a console program that will apply several tests and requests regarding a given list of server nodes.
+	
+	Usage:
+		The list of server nodes is given to the program by parameter, either by giving directly a coma separated list of node name with "-Node" or by giving the path to a file containing the list of node with "-File".
+		The "-FromGridDB" or "-FromMarleyDB" parameters alone can also be used to select all nodes listed respectively in the Grid database or in the Marley database.
+		The parameter "-NoPostCheck" can be added to disable the execution of the post-checks.
+	
+	functioning, titre a trouver:
+		After parsing the parameters the program call the Process method of the GridAudit class with a list of node name.
+		For each node a thread is created, each thread will execute a list of check regarding a server node.
+		The check list is defined in the configuration file and they will be executed in the same order as listed in the configuration file.
+		A check can contain nested checks that will be only executed if the parent check has been executed succesfully and return a positive value.
+		(for example with a WMI check containing all the WMI related checks, it don't need to try to execute all the nested checks for a node not compatible with WMI)
+
+		The currents checks are divided in 2 types:
+			parent checks used as conditions for the execution of their nested checks:
+				NodeWmiCheck: verify if the node checked can receive WMI requests
+				NodePingState: verify if the node can be pinged
+
+			checks retreiving informations about the node and storing/updating those informations in the AuditNode database to be accesible in the GridHome platform:
+				NodeExistsInInfos : test if the node is listed in the Grid database or/and in the Marley database
+				NodeHalInfos : get several informations about the node from the HAL API (server installation date, decomission date, bundle etc...)
+				NodeHardwareInfos: get several informations about the node hardware and operating system, mainly through WMI requests (Os version/architecture, model, memory informations, uptime etc...)
+				NodeIcmInfos: get the node compliance ratio from the ICM API
+				
+
+				GridSupervisor:
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+-------------------------------------------
+Grid Computing technical scope :
+
+Some applications want to use as much computing resources as possible : 
+ CPU power is the bottleneck
+
+Computing resources can be connected and work together 
+ Glued by a middleware
+
+ 
+ 
+ 
+ 
+Areas where Grid Computing is used 
+
+Science & numerical simulations 
+ Molecular biology, weather forecast, seismology
+
+Industry 
+Complex modeling, finite elements computation
+
+Finance 
+Risk evaluation, pricing
+
+Gaming industry
+
+
+ 
+ grid computing: A set of heterogenous & affordable computing resources, working together to provide clients a unified compute power source
+
+ 
+ A software solution for applications that require intensive computation.
+Provides a robust, affordable and highly scalable environment
+Leads to faster and more reliable results for clients
+
+
+Grid Computing = Distributed Computing + resource and workload management (control is very important note de gty)
+
+
+Management of 
+Resources 
+Virtualization, dynamic allocation and ownership
+Monitoring & control
+Resource Guaranteed SLA (Service Level Agreement) management
+Workload
+Execution, monitoring & control
+Scheduling and prioritization with load balance
+High reliability, availability, and resilience
+… while maintaining performance and scalability
+
+
+A single grid solution recommended within ITEC since 2003: Platform Symphony
+A global standard as the primary recommendation for projects
+Platform Symphony selected by “almost” all Grid projects 
+CRS/RIS using Platform LSF (batch oriented solution)
+Confirmed as unique solution during IDEA BC2R3 benchmark last July 2006
+Significant Grid projects engagement
+Large departmental grids in production 
+Significant investment in this area
+Transversal grid support: GTS Grid Services
+
+
+
+grosse part server sont symphony (note de gtry)
+
+
+Space limitation in datacenters => Outsourcing
+Data access from grid applications => DataGrid (GigaSpaces)
+Becoming a standard for big grids (Bacardi, AgRisk)
+Better utilization of current resources => Grids mutualization
+Merge of ex-GEDS post-trade grids => 10 000 cores on 1 grid
+Study starting (GTS/MKT and ITEC)
+New technologies => GPU
+Technology watch in progress, especially within MARK/R&D
+Won’t be used in short/middle term (complexity in development, not fully mature)
+
+
+
+scope:  application : ITEC
+		<===>
+		grid middleware: gtts grid
+		<====>
+		os hardware windows unix teams
+		
+		
+grid team:: Expertise and Support on Platform Symphony and LSF grid computing middleware
+5 FTE
+Responsible: Anthony Fréry
+
+Experts: Eric Fauquembergue / Benoît Serratrice / Alexandra Minne / Nicolas Jacq
+Services
+Advise and support applications & BLs teams at all stages (conception, development, production)
+Cluster management: Installation / upgrade, incident management, vendor relation
+On duty support (24x7)
+Many tools: monitoring, reporting, administration portal, documentation, etc
+
+
+services: ITEC/BLs advise
+During conception/development: About architecture, infrastructure, etc.
+Training sessions
+Clusters management
+Install/Upgrade clusters, deploy hotfixes
+Administrate cluster in coordination with ITEC/BLs
+Incidents diagnostic
+Analyze/Solve clusters’ issues
+Vendor relation
+Manage support tickets
+Follow-up products evolution
+On duty
+Grid team can be called on duty 24x7
+Monitoring of production clusters is configured to alert Grid team on duty
+
+
+tools: GridHome - http://gridhome.fr.world.socgen/
+Intranet web site to manage grids
+Audience : ITEC/BLs support
+2 usages :
+View: display information about clusters. (example: topology, healing center)
+Manage: execute maintenance actions on clusters. (example: monitoring/unmonitoring, open/close/restart nodes)
+Monitoring
+Full monitoring  of grid middleware
+Raise alerts to grid team and/or ITEC/BLs support
+
+Reporting - http://gridhome.fr.world.socgen/Reports/ and http://gridreporting.fr.world.socgen
+Information about clusters: topology, dashboard, workload, CPU usage, etc.
+Data is also provided through web services
+Grid agility pack
+A set of tools to accelerate and facilitate grid adoption
+Wiki - http://wiki.fr.world.socgen/display/GRID
+Description of grid team tools
+Procedures of maintenance actions
+
+
+
+
+notes pour moi::
+
+sur le projet: parler du nfutur du projet ce que devra faire le nouveau
+
+idée faire le rapport sous forme de mail pour le nouveau
+
+
+
+
+
+
+
+
+ 
+ 
+
+
