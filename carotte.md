@@ -55,13 +55,25 @@ The projects:
 				NodeWmiCheck: verify if the node checked can receive WMI requests
 				NodePingState: verify if the node can be pinged
 
-			checks retreiving informations about the node and storing/updating those informations in the AuditNode database to be accesible in the GridHome platform:
+			checks retreiving informations about the node and storing/updating those informations in the Grid database to be accesible in the GridHome platform:
 				NodeExistsInInfos : test if the node is listed in the Grid database or/and in the Marley database
-				NodeHalInfos : get several informations about the node from the HAL API (server installation date, decomission date, bundle etc...)
-				NodeHardwareInfos: get several informations about the node hardware and operating system, mainly through WMI requests (Os version/architecture, model, memory informations, uptime etc...)
+				NodeHalInfos : retreive several informations about the node from the HAL API (server installation date, decomission date, bundle etc...)
+				NodeHardwareInfos: retreive several hardware and operating system informations about the node, mainly through WMI requests (Os version/architecture, model, memory informations, uptime etc...)
 				NodeIcmInfos: get the node compliance ratio from the ICM API
+				NodeIKnowInfos: test if the node is listed in the IKnow API
+				NodeMarleyInfos: retreive several hardware and operating system informations about the node from the Marley database
+				NodeSymphonyInfos: retreive Symphony informations from the node
 				
-
+		Once all the checks have been executed for each node and each thread is killed, a series of post-checks (defined in the configuration file like the previous checks) are executed (except if the "-NoPostCheck" option was passed to the program).
+		Contrary to the previous checks, the post-checks are not executed for each node, they use directly the full list of nodes.
+		The post-checks search for inconsistencies of result from the checks :
+			CpuRepositoryDatabasePostCheck : list the entries  in the table AuditCpuRepository (Grid database) created automatically that should be checked by a human to confirm the number of CPU/cores available
+			LocationPostCheck: check location consistencie in the AuditNode table of the Grid database
+			NoMissingGridNodePostCheck : list all the symphony nodes that should have been listed in the auditNode table
+			RecentUpdatesPostCheck: lists the outdated entries from the AuditNode table
+		When a post-check found inconsistencies an alert is send by mail (the recipient is defined in the configuration file)
+		
+		
 				GridSupervisor:
 
 
