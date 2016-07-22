@@ -1,0 +1,196 @@
+*****
+dead cluster
+
+title = "WRONG_CONFIGURATION_" + curCluster.ImmutableName + "_ISDEAD";
+"Remove cluster " + curCluster.ImmutableName + " from gridsupervisor configuration. This cluster is flagged IsDead."
+" Decommission date is " + curCluster.DecommissionnedDate.Value.ToStandardDate_EN()
+
+
+*****
+catch
+title = error.GetTypeName() + " while initializing reachable host list."
+"An error occured while initilizing check round on cluster " + error
+
+
+********
+postcheck
+
+msg = "Check " + gridSupervisorCheck.name + " return error(s):" + msg
+
+**action
+ msg += "Action " + gridSupervisorCheck.action + " started on following servers:" + foreach nodetoact-> + nodeToAct.Name 
+
+ **remediationtip
+ msg += "Remediation tip(s): " + foreach check.tips -> tip
+
+ 
+***********
+last catch
+
+ title = e.GetTypeName() + " while checking " + gridSupervisorCheck.name + " on cluster " + curCluster.ImmutableName 
+ "An error occured during check " + gridSupervisorCheck.name + " on cluster " + curCluster.ImmutableName + ": \n" + e.ToConsoleFormattedString();
+ 
+**********************************************************
+serviceState 
+
+foreach node in nodes{
+
+	RESULT + node.Name + "\tService: " + _name("gridsnapshot" confIOC) + "\tNON-INEXISTENT" + Environment.NewLine;
+
+	foreach wmiservice s of node{
+
+		RESULT + node.Name + "\tService: " + s.Name + "\tState: " + s.State("STOPPED" confIOC) + Environment.NewLine
+
+	}
+}
+
+"One or more servers does have service " + _name("gridsnapshot" confIOC) + " in state " + _state("STOPPED" confIOC) + ":" + Environment.NewLine + RESULT
+
+==> node.Name _name("gridsnapshot") s.Name s.State _state("STOPPED")
+
+
+**********************************************************
+SymphonyFilesReference
+
+return empty
+
+if {
+	"No symphony versions has been found on nodes. There is certainly a problem (there should be at least \"undefined\")" + Constants.NewLine
+} else {
+
+	if {
+		"No common version found on all nodes."
+	} else {
+		"Unknown version found on all nodes."
+	}
+
+	foreach {
+		version + ":" 
+		foreach {
+			symphonyVersionNode.Name + ", "
+		}
+	}
+	
+	
+	(optional remediation message)
+	                remediationMessage = "\r\n\r\n############################################################";
+                remediationMessage += "\r\n## Missing FilesSets :";
+                remediationMessage += "\r\n############################################################\r\n\r\n";
+
+	"The following configuration is missing for these hosts: "
+	foreach {
+		node.Name + " "
+	}
+                        remediationItem.Append(fileCheckerConfig.Replace(_SymFileSetNameSyntax, fileSetName));
+                    else
+                        remediationItem.Append(fileCheckerConfig);
+	
+	                remediationMessage = "\r\n\r\n############################################################";
+                remediationMessage += "\r\n## Error(s) while generating remediations advice :";
+                remediationMessage += "\r\n############################################################\r\n\r\n";
+
+	foreach remediationError {append error} (catch dans foreach node => 
+		An error occured while generating the file set name for node " + host.Name
+		e.ToConsoleFormattedString()
+	)
+	
+	"Error: Cannot find reference file (" + currentRefFile.FullName + ")." 
+}
+
+
+**********************************************************
+NodeResAttribute
+
+foreach n in nodes
+
+	"Node " + n.Name + @" is located in BULL/LESCLAYES according to GridAudit, but does not have the resourceAttribute ""bull"" : this ressource attributes are """+n.ResourceAttribute+@"""");
+	"Node " + n.Name + @" is located in HP/MARCOUSSIS according to GridAudit, but does not have the resourceAttribute ""mar"" : this ressource attributes are """ + n.ResourceAttribute + @""""
+	
+	
+	==>nodeName nodeResourceAttribute isInBUll/HP
+**********************************************************
+EgoHostTypeCheck
+
+foreach n in nodes
+
+	"Host " + n.Name + " is " + n.HostType + " according to EGO but is " + n.AuditNodeDetails.OsArchi + " bits according to GridAudit"
+
+
+	==> nodeName nodeHostType nodeOsArchi
+**********************************************************
+FileSpace
+
+title1 =
+@"{0}############################################################
+# {1} 
+############################################################";
+
+title2 =
+@"{0}  ------------------------------
+  - {1} 
+  ------------------------------{2}";
+  
+  
+                  result.Append(string.Format(title2
+                    , Constants.NewLine
+                    , "Directory SIZE > " + _directoryThresholdinMB.Value + " MBytes"
+                    , Constants.NewLine));
+
+foreach {
+string.Format("{0} - {1}", node.Name.ToUpper(), value + " MBytes: " + formatRemoteDirectory(currentDirectory, node))
+formatRemoteDirectory -> 
+	FileSpace_MacroHandler.ReplaceMacro(directoryTemplate, SymInstallDir_path)
+	or
+	 FileSpace_MacroHandler.ReplaceMacro(directoryTemplate, ServiceName, WinSVCDir_path);
+	 or
+	 directoryTemplate
+	+ GTS.CommonLib.Helpers.IO.TranslateLocalToRemotePath(remotePath, node.Name)
+
+}
+"FQDN Host list:" + (loop-> list[i].FullyQualifiedName)
+
+"Directory files COUNT > " + _directoryFileCountThreshold.Value
+foreach-> node.Name.ToUpper(), data.DirectoryFileCountThreshold_data[node].ToString() + " files: " + formatRemoteDirectory(currentDirectory, node)
+"FQDN Host list: " + getFQDNHostList(data.DirectoryFileCountThreshold_data.Keys.ToList()
+
+Format(title2
+                    , Constants.NewLine
+                    , "File SIZE > " + _fileThresholdinMB.Value + " MBytes"
+build_Group_Return(group.MatchingRegex, ref refFileList, ref result/*, groupCount*/);
+	->Format(
+                    Constants.NewLine + "The file {0} is too big on {1} hosts:"
+                    , fileGroupName /*getShortFileName(groupName)*/
+                    , hostCount)
+	-> foreach -> Format(item, meta.Host.Name.ToUpper(), meta.SizeInMB + " MBytes: " + meta.RemoteName
+					(optinal +) FQDN Host list: " + getFQDNHostList(data.FileThresholdinMB_data[meta.MacroLocalName][meta.Host.Name]))
+build_Group_Return(notGroupedFile.UNCFileInfo.Name, ref refDummyFileList, ref result/*, groupCount*/);
+
+					
+					
+					
+					
+					
+**********************************************************
+DiskSpace
+
+foreach WMI.LogicalDisk ld {
+
+	node.Name + "\t" + ld.Name + "\tFree: " + (ld.FreeSpace(ulong) * 100 / ld.Size(ulong)) + "% (" + (ld.FreeSpace / 1048576) + " MB)" + Environment.NewLine;
+	OR
+	node.Name + "\t" + ld.Name + "\tFree: " + (ld.FreeSpace * 100 / ld.Size) + "% (" + (ld.FreeSpace / 1048576) + " MB)"
+}
+
+= "Diskspace of one or more servers is " + (_thresholdType.Equals("Minimum") ? "under" : "higher than") + " threshold (" + (_unit.Equals("Percent") ? _threshold + " %" : _threshold + " " + _unit) + ") for " + (_isValidForAllDrives ? "all drives" : "at least one drive") + ":" + Environment.NewLine + resultMsg;
+
+	==> nodeName ldName ldFreeSpace ldSize _thresholdType _unit _threshold _isValidForAllDrives
+
+********************************************************
+EventLogEntryOccurences
+
+foreach node
+	node.Name + "\t" + String.Format("{0} occurence(s)", moc.Count)
+	
+= "Entries of event log " + _logFile + " - code " + _eventCode + " found since " + beginSearchDate.ToString("dd/MM/yyyy HH:mm:ss") + " on:" + Environment.NewLine
+                            + RESULT;
+							
+	==> nodeName moc.Count logfile eventcode date beginsearch
