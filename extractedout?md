@@ -1,0 +1,80 @@
+_________________________________________________
+*************************************************
+SERVICESTATE
+
+==> l. 127
+	cible: node
+	val: node.name (+ _name)
+
+==> l. 138
+	cible: WMI.Service s + node
+	val: node.name + s.name + s.State
+	
+==> l. 138 ALT
+	cible: node (+WMI.Service.ServiceCollection sc)
+	val: list(s.name + s.state)
+	
+_________________________________________________
+*************************************************
+NODERESATRIBUTE
+
+==> l. 42
+	cible: node + "BULL/LESCLAYES"
+	val: node.ResourceAttribute + node.name
+	
+==> l. 55
+	cible: node + "HP/MARCOUSSIS"
+	val: node.ResourceAttribute + node.name
+
+_________________________________________________
+*************************************************
+FILESPACE
+
+==> l. 123
+	cible: currentDirectory
+	val: checkReturn
+XX-> might be wrong, need to refactor to have instances by node
+
+_________________________________________________
+*************************************************
+EGVENTLOGENTRYOCCURENCE
+
+==> l. 87
+	cible: node
+	val: moc.Count (+ _logfile + _eventCode)
+
+_________________________________________________
+*************************************************
+EGOHOSTTYPECHECK
+
+==> l. 26
+	cible: node
+	val: n.AuditNodeDetails.OsArchi (+ n.name + n.hostype)
+
+_________________________________________________
+*************************************************
+DISKSPACE
+
+==> l. XX
+	cible: node
+	val: list(ld.FreeSpace, ld.Size) (ld -> WMI.LogicalDisk ld)
+	
+_________________________________________________
+*************************************************
+SYMPHONYFILEREFERENCE
+
+==> l. 223
+	cible: currentRefFile.FullName
+	val: "file not found"
+	
+==> l. 148
+	cible: GLOBAL
+	val: "no symphony version found"
+	
+==> l. 166
+	cible: symphonyVersionNode
+	val: symphonyVersionNode.Name
+
+==> l. 233
+	cible: XX
+	val: (lots and lots of var) renderRemediationActions()
