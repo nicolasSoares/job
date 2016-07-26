@@ -30,13 +30,45 @@ Context :
 				This division is in charge of operations on storage et backup of the servers. The team assure the administration, maintenance and backup of all the Market infrastructure (physical and virtual) and handles several projects to ensure the proper functioning of the production
 				
 			- GRD (Grid) :
-				The Grid team is in charge of the computing grid
-				
+				The Grid team is in charge of handling and monitoring the grid computing platform and infrastructure for various departments of Société Générale
+
+(
+		Each of those departments except GRD contains several other departments, for example:
+			RESG/GTS/TFO (Technical Foundations) : They handle the networks and telecoms of the group and manage the activity continuation plans and the infrastructure's resilience.
+			RESG/GTS/EUS (end User Services) : They ensure the proper functioning of the end users tools (workstations, phones, printer etc...)
+)
+
+			Grid computing :
+		Grid computing is used for various purpose demanding high compute power including financial risk and pricing computing.
+		To achieve this high compute power, the grid computing platform is composed of a set of heterogenous and affordable computing resources, working together to provide clients a unified compute power source.
+		The computing resources are glued together and handled by middleware programs.
+		The main middleware software used in the grid is the Symphony platform (IBM), designed for the financial services industry and working with various operating systems.
+		
+	
+	
 The projects:
-	Common:
+
+		You will be working on the Grid monitoring projects, your mission is to continue the developement of exisiting tools and develop new projects or features of projects, mainly using the C# language, according to the needs of the Grid team's clients.
+
+
+		The projects, stored in a subversion repository, are all in the same solution with the several tools they use.
+		To work on the projects, you'l have to run the "SetupDrivesAndStartVS2010.bat" script in the "scripts" folder, it will mount the virtuals X and Y disks, used by the projects so they have the same environment as in production, and laucnh the solution in Visual Studio.
+
+		The solution contains several projects and tools, in the first time you will continue the development for the GridAudit and GridSupervisor projects.
+			Those projects have several dependencies common the other projects, therefore those dependencies are grouped in projects :
+				GTS-Common-Libs and GTS.GRD contains various helpers, class extensions and configurations
+				GTS.GRD.Domain contains classes and configurations used to communicate with the Grid database with the ORM NHibernate
+				GTS.GRD.Interfaces contains the interfaces used for the IoC (see below) of the services
+				GTS.GRD.Services includes several classes managing services (persistence, checks, WMI requests, notifications, compute nodes etc...) 
+			Most of the classes of the projects use the Inversion of Control design principle (IoC), it uses dependency injection to handle the load and configuration of the dependencies of the classes at run time.
+			This design principle allow a more modular approch and prevents thight coupling between classes.
+			The class IoCManager handles it, it uses the Castle Windsor Inversion of Control container one of the main IoC framework for .NET
+			
+			GridAudit and GridSupervisor
+		Common:
 	GridAudit:
 	
-	GridAudit is a console program that will apply several tests and requests regarding a given list of server nodes.
+	GridAudit is a console program that will apply several tests and requests regarding a given list of server nodes to acquire and store informations about those nodes and detect inconsistencies among the differents sources of those informations. ~~~~
 	
 	Usage:
 		The list of server nodes is given to the program by parameter, either by giving directly a coma separated list of node name with "-Node" or by giving the path to a file containing the list of node with "-File".
@@ -74,9 +106,12 @@ The projects:
 		When a post-check found inconsistencies an alert is send by mail (the recipient is defined in the configuration file)
 		
 		
-				GridSupervisor:
-
-
+	GridSupervisor:
+		GridSupervisor run as a service (except if it is executed with the "-NoDebug" parameter) and execute a list of compliance check on lists of server nodes.
+		The compliance errors detected are stored in the "GridComplianceAlerts" table of the Grid database to be displayed on the GridHome platform
+		The nodes lists are loaded from a configuration file, each list has its own list of check.
+		The table "ref_GridCompliance" of the Grid database contains the checks configurations : 
+			scope, delay between notifications, actions to execute if an alert is raised, templates to use on the GridHome platform.
 
 	
 	
