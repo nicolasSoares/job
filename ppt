@@ -1,0 +1,39 @@
+Page de garde
+	- logo tek + logo sogé
+	entreprise
+	nom + poste, mission
+
+sommaire
+
+ibtro
+	contexte stage
+	raisons choix stage
+	theme/problématique stage
+	plan pres orale (du coup sommaire ici)
+
+dev
+	tavaux réalisés
+		image projects
+		analyse du travail fait pour la mission:
+			moyens
+			méthodologie
+			résultats
+			points de satisfaction
+			point d'amélioration => unifier/transcender les services, (api par example) avoir une norme
+			
+conclusion / bilan personnel
+	ressenti stage
+	apport pro, perso, technique, humain
+	compétences acquises, montées en compétences
+	comment projet professionel a évolué (est-ce que je vais retravailler)
+	
+	
+anecdotes intéressante insolite
+
+
+symphony + lsf + cockpit/marx (symphony = 3/4 des servers et des cores)
+
+schéma: grid team :
+	application = ITEC   <====>    grid middelware = GTS grid  <=======> os hardware = GTS WINDOWS/unix team
+	
+	grid = monitoring + reporting
