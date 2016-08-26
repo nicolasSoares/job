@@ -1,3 +1,5 @@
+Hello, my name is Nicolas soares, I'm about to finish, I hope, the epitech curiculum and to conclude those last five years I made an internship In the societe generale company that I will present to you
+
 Société Générale is one of the main and oldest French multinational banking and financial
 services company.
 The company group is a universal bank divided into 3 main pillars :
