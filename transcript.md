@@ -1,3 +1,13 @@
+Société Générale is one of the main and oldest French multinational banking and financial
+services company.
+The company group is a universal bank divided into 3 main pillars :
+- Retail banking (Société Générale, Crédit du Nord and Boursorama)
+- International Banking and Financial Services (IBFS)
+- Corporate and Investment Banking (SG CIB)
+Those 3 pillars are backed by 2 other core activities :
+- Specialised Financial Services & Insurance
+- Private Banking, Global Investment Management & Services
+
 services
 
 	RESG : direction of the group's ressources and innovations, it gathers the teams in charge of information systems, technical infrastructures, purchases estate operations and counsel activities of the group
